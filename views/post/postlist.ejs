@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<%  include ../partial/head %>
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<% include ../partial/header %>
+
+			<% include ../partial/navbar %>
+		</div>
+
+		<% include ../partial/sidebar %>
+
+		<div class="main-panel">
+			<div calss="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Basic</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="basic-datatables" class="display table table-striped table-hover" >
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Content</th>
+                        <th>Author name</th>
+                        <th>Author email</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% for(var i=0; i<post.length; i++){%>
+                        <tr>
+                          <td><a href="/posts/postdetail/<%=post[i]._id%>"><%= post[i].title %></a></td>
+                          <td><%= post[i].content %></td>
+                          <td><%= post[i].author.name %></td>
+                          <td><%= post[i].author.email %></td>
+
+                        </tr>
+                    <%}%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+		<% include ../partial/footer %>
+		</div>
+
+		<!-- Custom template | don't include it in your project! -->
+
+		<!-- End Custom template -->
+	</div>
+	<% include ../partial/script %>
+</body>
+<script src="/javascripts/jquery-3.4.1.js"></script>
+<script src="/assets/js/plugin/datatables/datatables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#basic-datatables').DataTable({
+    });
+});
+</script>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Post List</title>
+    <style media="screen">
+      table,th,td{
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Post list</h1>
+    <table>
+      <thead>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Author name</th>
+        <th>Author email</th>
+      </thead>
+      <tbody>
+        <% for(var i=0; i<post.length; i++){%>
+          <tr>
+            <td><a href="/posts/postdetail/<%=post[i]._id%>"><%= post[i].title %></a></td>
+            <td><%= post[i].content %></td>
+            <td><%= post[i].author.name %></td>
+            <td><%= post[i].author.email %></td>
+
+          </tr>
+      <%}%>
+      </tbody>
+    </table>
+  </body>
+</html> -->

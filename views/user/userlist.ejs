@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<%  include ../partial/head %>
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<% include ../partial/header %>
+
+			<% include ../partial/navbar %>
+		</div>
+
+		<% include ../partial/sidebar %>
+
+		<div class="main-panel">
+			<div calss="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Basic</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="basic-datatables" class="display table table-striped table-hover" >
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                        <% for(var i=0; i<user.length; i++){%>
+                          <tr>
+                            <td><a href="/users/userdetail/<%=user[i]._id%>"><%= user[i].name %></a></td>
+                            <td><%= user[i].email %></td>
+                            <td><%= user[i].password %></td>
+                          </tr>
+                          <%}%>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+		<% include ../partial/footer %>
+		</div>
+
+		<!-- Custom template | don't include it in your project! -->
+
+		<!-- End Custom template -->
+	</div>
+	<% include ../partial/script %>
+</body>
+<script src="/javascripts/jquery-3.4.1.js"></script>
+<script src="/assets/js/plugin/datatables/datatables.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#basic-datatables').DataTable({
+    });
+});
+</script>
+</html>

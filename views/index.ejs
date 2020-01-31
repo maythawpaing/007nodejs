@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= user.name %></p>
+    <a href="/home">welcome to home</a>
+    <a href="/users/useradd">User Add</a>
+    <a href="/users/userlist">User list</a>
+    <a href="/posts/postadd">Post Add</a>
+    <a href="/posts/postlist">Post List</a><p>
+    <% if(user.name == "unknown"){%>
+      <a href="/signin"><button type= "button" name="button">Login</button></a>
+    <%}else{%>
+      <a href="/signout"><button type= "button" name="button">Log Out</button></a>
+
+  <% }%>
+  </body>
+</html>
