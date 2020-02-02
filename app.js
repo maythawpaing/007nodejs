@@ -7,7 +7,13 @@ var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var postRouter = require('./routes/posts');
+
 var session = require('express-session');
+
+// restful api route
+var apiUsersRouter = require('./api/routes/users');
+var apiPostsRouter = require('./api/routes/posts');
+var apiAdminRouter = require('./api/routes/admin');
 var app = express();
 
 // view engine setup
@@ -25,15 +31,20 @@ app.use(session({
   saveuninitialized:true
 
 }))
-
 // mongoose.connect('mongodb://127.0.0.1/mynodejs007');
-mongoose.connect('mongodb+srv://may:may123@007nodejs-2avdn.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://maythaw:maythaw123@nodejs007-kplii.mongodb.net/test?retryWrites=true&w=majority');
 
 var db= mongoose.connection;
 db.on('error',console.error.bind(console,'MongoDB connection error:'));
 
-
+app.use(function(req,res,next){
+  res.locals.user = req.session.user;
+  next();
+});
 app.use('/', indexRouter);
+app.use('/api',apiAdminRouter);
+app.use('/api/users',apiUsersRouter);
+app.use('/api/posts',apiPostsRouter);
 app.use(function(req,res,next){
   if(req.session.user){
     next();
@@ -43,6 +54,7 @@ app.use(function(req,res,next){
 })
 app.use('/users', usersRouter);
 app.use('/posts',postRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
